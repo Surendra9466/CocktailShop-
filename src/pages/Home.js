@@ -14,7 +14,6 @@ export default function Home() {
       const data = await response.json();
       const { drinks } = data;
       if (drinks) {
-        console.log(drinks);
         const newCocktails = drinks.map((drink) => {
           const { idDrink, strDrink, strDrinkThumb, strAlcoholic, strGlass } = drink;
           return {

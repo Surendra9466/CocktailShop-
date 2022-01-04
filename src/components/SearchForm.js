@@ -3,7 +3,6 @@ import React, { useRef } from "react";
 export default function SearchForm({ setSearchTerm }) {
   const searchValue = useRef("");
   const searchCocktail = () => { 
-    console.log(searchValue.current.value);
     setSearchTerm(searchValue.current.value);
   }
   // const searchCocktail = (e) => { }
