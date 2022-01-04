@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import React, { useEffect, useState } from "react";
 import CocktailList from "../components/CocktailList";
 import SearchForm from "../components/SearchForm";
