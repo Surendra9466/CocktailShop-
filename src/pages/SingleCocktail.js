@@ -6,29 +6,28 @@ export default function SingleCocktail() {
   const [cocktail, setCocktail] = useState(null);
   const { id } = useParams();
 
-  const fetchData = async () => {
-    setLoading(true);
-    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-    const data = await response.json();
-    console.log(data);
-    if (data.drinks) {
-      const { strDrink: name, strDrinkThumb: image, strAlcoholic: info,
-        strCategory: category, strGlass: glass, strInstructions: instructions,
-        strIngredient1, strIngredient2,
-        strIngredient3, strIngredient4, strIngredient5 } = data.drinks[0];
-
-      const ingredients = [strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5];
-
-      const newCocktail = { name, image, category, instructions, glass, ingredients, info };
-      setCocktail(newCocktail);
-
-    } else {
-      setCocktail(null);
-    }
-    setLoading(false);
-  }
-
   useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+      const data = await response.json();
+      console.log(data);
+      if (data.drinks) {
+        const { strDrink: name, strDrinkThumb: image, strAlcoholic: info,
+          strCategory: category, strGlass: glass, strInstructions: instructions,
+          strIngredient1, strIngredient2,
+          strIngredient3, strIngredient4, strIngredient5 } = data.drinks[0];
+
+        const ingredients = [strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5];
+
+        const newCocktail = { name, image, category, instructions, glass, ingredients, info };
+        setCocktail(newCocktail);
+
+      } else {
+        setCocktail(null);
+      }
+      setLoading(false);
+    }
     fetchData();
   }, [id]);
 
